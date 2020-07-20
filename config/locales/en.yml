@@ -1,0 +1,31 @@
+en:
+  activerecord:
+    models:
+      spree/producer:
+        one: Producer
+        other: Producers
+    attributes:
+      spree/producer:
+        about_us: About us
+        contact_us: Contact us
+        image: Image
+        name: name
+        state: state
+        created_at: created at
+        priority: priority
+  spree:
+    back_to_producers_list: Back To Producers List
+    edit_producer: Edit Producer
+    new_producer: New Producer
+    only_alphanumeric_chars: should contain only letters and digits
+    order_mailer:
+      producer_notification_email:
+        dear_producer: Dear Producer,
+        subject: Producer notification
+        thanks: Thanks
+    producer: Producer
+    producer_name: Producer Name
+    producer_states:
+      active: Active
+      blocked: Blocked
+      pending: Pending

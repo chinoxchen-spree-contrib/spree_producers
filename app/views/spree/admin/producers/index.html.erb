@@ -1,0 +1,105 @@
+<% content_for :page_title do %>
+  <%= Spree.t(plural_resource_name(Spree::Producer)) %>
+<% end %>
+
+<% content_for :page_actions do %>
+  <%= button_link_to Spree.t(:new_producer), new_object_url, { class: "btn-success", icon: 'add', id: 'admin_new_producer' } %>
+<% end if can?(:create, Spree::Producer) %>
+
+<% content_for :table_filter do %>
+  <div data-hook="admin_producers_index_search">
+    <%= search_form_for [:admin, @search] do |f| %>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <%= label_tag :q_name_cont, Spree.t(:name) %>
+            <%= f.text_field :name_cont, tabindex: 1, class: "form-control js-quick-search-target" %>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <%= label_tag :q_state_eq, Spree.t(:state) %>
+            <%= f.select :state_eq, Spree::Producer.state_machines[:state].states.collect { |s| [Spree.t("producer_states.#{s.name}"), s.value] }, { include_blank: true }, class: 'select2 js-filterable' %>
+          </div>
+        </div>
+      </div>
+      <div data-hook="admin_producers_index_search_buttons" class="form-actions">
+        <%= button Spree.t(:filter_results), 'search' %>
+      </div>
+    <% end %>
+  </div>
+<% end %>
+
+<%= render partial: 'spree/admin/shared/index_table_options', locals: { collection: @collection } %>
+
+<% if @producers.any? %>
+  <table class="table sortable" data-hook="producers_table" data-sortable-link="<%= update_positions_admin_producers_url %>">
+    <thead>
+      <tr data-hook="producers_header">
+        <th>
+          <%= I18n.t(:priority, scope: 'activerecord.attributes.spree/producer') %>
+        </th>
+        <th>
+          <%= sort_link @search, :name, I18n.t(:name, scope: 'activerecord.attributes.spree/producer') %>
+        </th>
+        <th>
+          <%= sort_link @search, :state, I18n.t(:state, scope: 'activerecord.attributes.spree/producer') %>
+        </th>
+        <th>
+          <%= I18n.t(:about_us, scope: 'activerecord.attributes.spree/producer') %>
+        </th>
+        <% if Spree.version.to_f >= 3.6 %>
+          <th>
+            <%= I18n.t(:image, scope: 'activerecord.attributes.spree/producer') %>
+          </th>
+        <% end %>
+        <th>
+          <%= sort_link @search, :created_at, I18n.t(:created_at, scope: 'activerecord.attributes.spree/producer') %>
+        </th>
+        <th class="actions"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @producers.each do |producer| %>
+        <tr id="<%= spree_dom_id producer %>" data-hook="producers_row">
+          <td class="move-handle text-center">
+            <span class="icon icon-move handle"></span>
+          </td>
+          <td>
+            <%= producer.name %>
+          </td>
+          <td>
+            <span class="label label-<%= producer.state.downcase %>"><%= producer.state.humanize.downcase %></span>
+            <span class="icon icon-filter filterable js-add-filter" data-ransack-field="q_state_eq" data-ransack-value="<%= producer.state %>"></span>
+          </td>
+          <td>
+            <%= producer.about_us&.truncate(20) %>
+          </td>
+          <% if Spree.version.to_f >= 3.6 %>
+            <td>
+              <%= image_tag main_app.url_for(producer.image.url(:mini)) if producer.image %>
+            </td>
+          <% end %>
+          <td>
+            <%= pretty_time(producer.created_at) %>
+          </td>
+          <td class="actions actions-2 text-right">
+            <%= link_to_edit producer, no_text: true, class: 'edit' %>
+            <!-- Add translation icon support -->
+            <%= link_to_with_icon 'translate',
+                                  nil,
+                                  spree.admin_translations_path('producer', producer.id),
+                                  title: Spree.t(:'i18n.translations'),
+                                  class: 'btn btn-sm btn-primary' if defined? (SpreeGlobalize)%>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <div class="alert alert-info alpha twelve columns no-objects-found">
+    <%= Spree.t(:no_resource_found, resource: plural_resource_name(Spree::Producer)) %>
+  </div>
+<% end %>
+
+<%= render partial: 'spree/admin/shared/index_table_options', locals: { collection: @collection } %>

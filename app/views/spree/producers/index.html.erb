@@ -1,0 +1,16 @@
+<div class="homepage-fashion-trends-box">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <h2 class="mb-4 sans-serif primary-title"><%= Spree.t('homepage.producers_title') %></h2>
+      </div>
+    </div>
+    <div class="row">
+      <% @producers.each do |producer| %>
+        <div class="col-6 col-md-3 text-center mb-3">
+          <%= render partial: 'spree/shared/producers/producer_card', locals: { producer: producer } %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

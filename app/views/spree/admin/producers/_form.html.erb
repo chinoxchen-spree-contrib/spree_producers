@@ -1,0 +1,24 @@
+<%= render partial: 'spree/shared/error_messages', locals: { target: @producer } %>
+<div class="form-group">
+  <%= f.field_container :name do %>
+    <%= f.label :name %>
+    <%= f.text_field :name, class: 'form-control' %>
+  <% end %>
+  <%= f.field_container :about_us do %>
+    <%= f.label :about_us %>
+    <%= f.text_area :about_us, class: 'form-control' %>
+  <% end %>
+  <%= f.field_container :state do %>
+    <%= f.label :state %>
+    <%= f.select :state,
+      options_for_select(Spree::Producer.state_machines[:state].states.collect { |s| [Spree.t("producer_states.#{s.name}"), s.value] }, selected: @producer.state),
+      {}, class: 'select2', required: :required %>
+  <% end %>
+  <% if Spree.version.to_f >= 3.6 %>
+    <%= f.field_container :image do %>
+      <%= f.label :image %>
+      <%= f.file_field :image %>
+      <%= image_tag main_app.url_for(@producer.image.url(:small)) if @producer.image %>
+    <% end %>
+  <% end %>
+</div>
