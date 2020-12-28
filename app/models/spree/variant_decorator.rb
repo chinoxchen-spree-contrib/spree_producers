@@ -1,4 +1,6 @@
 module Spree::VariantDecorator
+  Spree::Variant.whitelisted_ransackable_attributes |= ['storage_location']
+
   def self.prepended(base)
     base.before_create :assign_producer_id
   end
