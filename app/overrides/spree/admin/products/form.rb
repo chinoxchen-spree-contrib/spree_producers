@@ -15,7 +15,8 @@ Deface::Override.new(
           HTML
 )
 
-Deface::Override.new virtual_path:  "spree/admin/products/_form",
-                     name:          "due_date",
+Deface::Override.new virtual_path:  'spree/admin/products/_form',
+                     original:      'a362fae378c90638b6b9f5df7ab81d997fb68281',
+                     name:          'due_date',
                      insert_bottom: '[data-hook="admin_product_form_discontinue_on"]',
-                     partial:       "spree/admin/products/due_date_field"
+                     partial:       'spree/admin/products/due_date_field'

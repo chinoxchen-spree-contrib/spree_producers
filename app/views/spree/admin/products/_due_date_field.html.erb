@@ -3,14 +3,12 @@
     <%= f.label :due_date, Spree.t(:due_date) %>
     <%= f.error_message_on :due_date %>
 
-    <div class="input-group datePickerFrom"
-         data-wrap="true" >
-
+    <div class="input-group datePickerFrom" data-wrap="true" >
       <%= f.text_field :due_date,
-                       value: datepicker_field_value(@product.due_date),
+                       value: @product.due_date.present? ? datepicker_field_value(@product.due_date) : '',
                        placeholder: Spree.t(:select_a_date),
-                       class: 'form-control shadow-none ',
-                       'data-input':'' %>
+                       class: 'form-control shadow-none',
+                       'data-input': '' %>
 
       <%= render partial: 'spree/admin/shared/cal_close' %>
     </div>
