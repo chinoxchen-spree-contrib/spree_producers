@@ -21,7 +21,7 @@ module Spree
     private
 
     def load_producer
-      @producer = @producers.friendly.find(params[:id])
+      @producer = Spree::Producer.friendly.find(params[:id])
     end
   end
 end
