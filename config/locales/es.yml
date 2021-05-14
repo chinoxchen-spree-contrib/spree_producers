@@ -15,6 +15,7 @@ es:
         priority: prioridad
   spree:
     back_to_producers_list: Volver a la lista de productores
+    contact_name: Nombre de contacto
     edit_producer: Editar productor
     new_producer: Nuevo productor
     only_alphanumeric_chars: Debería contener solo letras y dígitos
