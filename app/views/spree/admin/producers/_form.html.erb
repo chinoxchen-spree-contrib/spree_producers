@@ -12,7 +12,7 @@
 
   <%= f.field_container :phone do %>
     <%= f.label Spree.t(:phone) %>
-    <%= f.text_field :phone, maxlength: 12, class: 'form-control'  %>
+    <%= f.text_field :phone, maxlength: 14, class: 'form-control', data: {'mask-phone': ''}  %>
   <% end %>
 
   <%= f.field_container :email do %>
