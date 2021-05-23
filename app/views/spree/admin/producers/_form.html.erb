@@ -4,6 +4,22 @@
     <%= f.label :name %>
     <%= f.text_field :name, class: 'form-control' %>
   <% end %>
+
+  <%= f.field_container :contact_name do %>
+    <%= f.label Spree.t(:contact_name) %>
+    <%= f.text_field :contact_name, class: 'form-control' %>
+  <% end %>
+
+  <%= f.field_container :phone do %>
+    <%= f.label Spree.t(:phone) %>
+    <%= f.text_field :phone, maxlength: 14, class: 'form-control', data: {'mask-phone': ''}, placeholder: '56912345678'  %>
+  <% end %>
+
+  <%= f.field_container :email do %>
+    <%= f.label Spree.t(:email) %>
+    <%= f.email_field :email, class: 'form-control' %>
+  <% end %>
+
   <%= f.field_container :about_us do %>
     <%= f.label :about_us %>
     <%= f.text_area :about_us, class: 'form-control' %>
@@ -17,8 +33,8 @@
   <%= f.field_container :state do %>
     <%= f.label :state %>
     <%= f.select :state,
-      options_for_select(Spree::Producer.state_machines[:state].states.collect { |s| [Spree.t("producer_states.#{s.name}"), s.value] }, selected: @producer.state),
-      {}, class: 'select2', required: :required %>
+                 options_for_select(Spree::Producer.state_machines[:state].states.collect { |s| [Spree.t("producer_states.#{s.name}"), s.value] }, selected: @producer.state),
+                 {}, class: 'select2', required: :required %>
   <% end %>
   <% if Spree.version.to_f >= 3.6 %>
     <%= f.field_container :image do %>
