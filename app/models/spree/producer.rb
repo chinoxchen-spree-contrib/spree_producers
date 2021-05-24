@@ -12,9 +12,8 @@ module Spree
 
     validates :slug, uniqueness: true
     validates_associated :image if Spree.version.to_f >= 3.6
-    validates :contact_name, presence: true
-    validates :phone, presence: true, numericality: { only_integer: true }, length: { maximum: 15 }
-    validates :email, presence: true
+    validates :phone, numericality: { only_integer: true }, length: { maximum: 15 }
+    validates :email, email: true, allow_blank: true, allow_nil: true
 
     with_options dependent: :destroy do
       if Spree.version.to_f >= 3.6

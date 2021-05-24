@@ -8,5 +8,6 @@ end
 gem 'spree', github: 'spree/spree', branch: 'master'
 #gem 'sprockets', '~> 4.0.2'
 gem 'rails-controller-testing'
+gem 'email_validator' 
 
 gemspec
