@@ -30,6 +30,11 @@
     <%= f.check_box :local, class: 'form-control' %>
   <% end %>
 
+  <%= f.field_container :conscious_brand do %>
+    <%= f.label :conscious_brand %>
+    <%= f.check_box :conscious_brand, class: 'form-control' %>
+  <% end %>
+
   <%= f.field_container :state do %>
     <%= f.label :state %>
     <%= f.select :state,

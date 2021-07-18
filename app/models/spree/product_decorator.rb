@@ -10,6 +10,12 @@ module Spree::ProductDecorator
   rescue
     false
   end
+
+  def conscious?
+    producer.conscious_brand?
+  rescue
+    false
+  end
 end
 
 Spree::Product.prepend Spree::ProductDecorator
