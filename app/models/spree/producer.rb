@@ -35,7 +35,7 @@ module Spree
 
     scope :active, -> { where(state: 'active') }
 
-    self.whitelisted_ransackable_attributes = %w[name state]
+    self.whitelisted_ransackable_attributes = %w[name state conscious_brand]
 
     # Spree Globalize support
     # https://github.com/spree-contrib/spree_multi_vendor/issues/104
