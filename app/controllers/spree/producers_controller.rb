@@ -19,7 +19,7 @@ module Spree
     def show; end
 
     def infinite_scroll_producer
-      render template: 'spree/shared/producers/producer_products', producer: @producer
+      render partial: 'spree/shared/producers/producer_products', locals: { producer: @producer }
     end
 
     private
