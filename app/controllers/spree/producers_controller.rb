@@ -1,6 +1,6 @@
 module Spree
   class ProducersController < Spree::StoreController
-    before_action :load_producer, only: [:show]
+    before_action :load_producer, only: %i[show infinite_scroll_producer]
 
     respond_to :html
 
@@ -17,6 +17,10 @@ module Spree
     end
 
     def show; end
+
+    def infinite_scroll_producer
+      render template: 'spree/shared/producers/producer_products', producer: @producer
+    end
 
     private
 
