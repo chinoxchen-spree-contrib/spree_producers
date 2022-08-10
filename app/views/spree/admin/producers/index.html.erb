@@ -60,6 +60,9 @@
         <th>
           <%= sort_link @search, :created_at, I18n.t(:created_at, scope: 'activerecord.attributes.spree/producer') %>
         </th>
+        <th>
+          <%= 'ID' %>
+        </th>
         <th class="actions"></th>
       </tr>
     </thead>
@@ -89,6 +92,9 @@
           </td>
           <td>
             <%= pretty_time(producer.created_at) %>
+          </td>
+          <td>
+            <%= producer.id %>
           </td>
           <td class="actions actions-2 text-right">
             <%= link_to_edit producer, no_text: true, class: 'edit' %>
