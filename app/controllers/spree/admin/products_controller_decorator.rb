@@ -1,6 +1,6 @@
 module Spree::Admin::ProductsControllerDecorator
   def self.prepended(base)
-    base.before_action :load_producers, only: [:new, :edit]
+    base.before_action :load_producers
   end
 
   private
